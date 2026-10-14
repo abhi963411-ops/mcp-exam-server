@@ -3,6 +3,9 @@ services:
     name: mcp-exam-challenge-server
     runtime: node
     plan: free
-    rootDir: mcp-exam-server
+    rootDir: api-point
     buildCommand: npm install
     startCommand: npm start
+    envVars:
+      - key: QUESTION_DATA_URL
+        sync: false

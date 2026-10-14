@@ -1,0 +1,14 @@
+{
+  "name": "acme-order-ledger-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plain-English question service for the Acme Appliances order ledger",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

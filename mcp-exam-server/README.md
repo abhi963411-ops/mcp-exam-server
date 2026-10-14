@@ -50,12 +50,10 @@ The last line should say `Match: True`. Test a second challenge as well.
 - Timestamp and signature verification are omitted because they are optional in the assignment.
 
 ## Deploy to Render
-1. Push this repository to GitHub.
-2. In Render, create a **New Blueprint Instance** and connect this repository. The root-level `render.yaml` configures the web service to run from `mcp-exam-server`.
-3. Deploy and wait for Render to mark the service live. Render provides HTTPS and forwards requests to the Node server.
-4. Your MCP endpoint is the HTTPS service URL shown by Render plus `/mcp`, for example `https://your-service.onrender.com/mcp` (example only).
-5. Run the PowerShell test again with the public URL instead of localhost. Also test `initialize` and `tools/list` against that URL.
-6. Keep the service available through the grading window. Some free plans sleep when idle; check your host's plan and availability.
+The root-level Render Blueprint now deploys the Acme ledger question API from
+`api-point`, not this legacy MCP server. See the repository's top-level README
+for the active public service deployment instructions.
 
 ## Important
-The server listens over HTTP behind Render's HTTPS-terminating proxy. Local runs use HTTP; the public endpoint uses HTTPS after you deploy the Blueprint. This repository configuration does not create a Render service automatically. Do not submit a URL until you have deployed and tested the public HTTPS endpoint.
+This MCP server listens over HTTP locally and is not the active Render service
+configured for this repository.
