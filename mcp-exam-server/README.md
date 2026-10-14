@@ -50,13 +50,12 @@ The last line should say `Match: True`. Test a second challenge as well.
 - Timestamp and signature verification are omitted because they are optional in the assignment.
 
 ## Deploy to Render
-1. Create a GitHub repository and upload `server.js`, `package.json`, and this README.
-2. In Render, create a **New Web Service** and connect the repository.
-3. Choose Node; set build command to `npm install` and start command to `npm start`.
-4. Deploy and wait for Render to mark the service live.
-5. Your MCP endpoint is the actual Render HTTPS base URL plus `/mcp`, e.g. `https://your-service.onrender.com/mcp` (example only).
-6. Run the PowerShell test again with the public URL instead of localhost. Also test `initialize` and `tools/list` against that URL.
-7. Keep the service available through the grading window. Some free plans sleep when idle; check your host's plan and availability.
+1. Push this repository to GitHub.
+2. In Render, create a **New Blueprint Instance** and connect this repository. The root-level `render.yaml` configures the web service to run from `mcp-exam-server`.
+3. Deploy and wait for Render to mark the service live. Render provides HTTPS and forwards requests to the Node server.
+4. Your MCP endpoint is the HTTPS service URL shown by Render plus `/mcp`, for example `https://your-service.onrender.com/mcp` (example only).
+5. Run the PowerShell test again with the public URL instead of localhost. Also test `initialize` and `tools/list` against that URL.
+6. Keep the service available through the grading window. Some free plans sleep when idle; check your host's plan and availability.
 
 ## Important
-This package contains the server project but does not create a GitHub repository or deploy a live service. Do not submit a URL until you have deployed and tested the public HTTPS endpoint.
+The server listens over HTTP behind Render's HTTPS-terminating proxy. Local runs use HTTP; the public endpoint uses HTTPS after you deploy the Blueprint. This repository configuration does not create a Render service automatically. Do not submit a URL until you have deployed and tested the public HTTPS endpoint.
