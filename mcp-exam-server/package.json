@@ -1,0 +1,9 @@
+{
+  "name": "mcp-exam-challenge-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal stateless MCP Streamable HTTP server for the exam challenge",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" }
+}
