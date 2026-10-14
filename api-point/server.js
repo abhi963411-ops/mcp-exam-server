@@ -160,8 +160,14 @@ function answerQuestion(question, orders, rates) {
   const normalized = normalizeText(question);
   const count = isCountQuestion(question);
   const metricName = amountMetric(question);
-  const isCustomerCount = count && /\b(customer|customers|client|clients)\b/.test(normalized) &&
-    !/\borders?\b/.test(normalized) && !/\b(units?|items?)\b/.test(normalized);
+  const asksDistinctCustomers = /\b(distinct|unique)\b/.test(normalized) &&
+    /\b(customer|customers|client|clients)\b/.test(normalized);
+  const isCustomerCount = count &&
+    (asksDistinctCustomers || (
+      /\b(customer|customers|client|clients)\b/.test(normalized) &&
+      !/\borders?\b/.test(normalized) &&
+      !/\b(units?|items?)\b/.test(normalized)
+    ));
   const isUnitCount = count && /\b(units?|items?|quantity)\b/.test(normalized);
   const rankedOrderCount = !metricName &&
     /\b(top|highest|largest|most|best|least|lowest|smallest)\b/i.test(question) &&

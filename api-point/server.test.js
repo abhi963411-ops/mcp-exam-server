@@ -41,3 +41,13 @@ test("ranks products by units sold using paid orders", () => {
 test("counts distinct customers in a filtered set", () => {
   assert.equal(answerQuestion("How many customers ordered from the North region in March 2026?", rows, rates), 3);
 });
+
+test("counts distinct customers instead of orders when orders is a status qualifier", () => {
+  const kettleOrders = [
+    { id: "K1", customer: "C1001", region: "North", product: "Kettle", qty: 1, amount: 50, currency: "USD", status: "paid", created_at: "2026-03-13T10:00:00+05:30", updated_at: "2026-03-13T11:00:00+05:30" },
+    { id: "K2", customer: "C1001", region: "North", product: "Kettle", qty: 1, amount: 50, currency: "USD", status: "paid", created_at: "2026-03-14T10:00:00+05:30", updated_at: "2026-03-14T11:00:00+05:30" },
+    { id: "K3", customer: "C1002", region: "North", product: "Kettle", qty: 1, amount: 50, currency: "USD", status: "refunded", created_at: "2026-03-15T10:00:00+05:30", updated_at: "2026-03-15T11:00:00+05:30" },
+    { id: "K4", customer: "C1003", region: "North", product: "Kettle", qty: 1, amount: 50, currency: "USD", status: "void", created_at: "2026-03-16T10:00:00+05:30", updated_at: "2026-03-16T11:00:00+05:30" },
+  ];
+  assert.equal(answerQuestion("How many distinct customers have bought a Kettle (paid orders only)?", kettleOrders, rates), 1);
+});
