@@ -51,3 +51,12 @@ test("counts distinct customers instead of orders when orders is a status qualif
   ];
   assert.equal(answerQuestion("How many distinct customers have bought a Kettle (paid orders only)?", kettleOrders, rates), 1);
 });
+
+test("averages paid order value when the question asks how many dollars", () => {
+  const centralOrders = [
+    { id: "C1", customer: "C1001", region: "Central", product: "Blender", qty: 1, amount: 100, currency: "USD", status: "paid", created_at: "2026-03-01T10:00:00+05:30", updated_at: "2026-03-01T11:00:00+05:30" },
+    { id: "C2", customer: "C1002", region: "Central", product: "Toaster", qty: 1, amount: 100, currency: "EUR", status: "paid", created_at: "2026-03-02T10:00:00+05:30", updated_at: "2026-03-02T11:00:00+05:30" },
+    { id: "C3", customer: "C1003", region: "Central", product: "Kettle", qty: 1, amount: 500, currency: "USD", status: "refunded", created_at: "2026-03-03T10:00:00+05:30", updated_at: "2026-03-03T11:00:00+05:30" },
+  ];
+  assert.equal(answerQuestion("On average, how many US dollars is a paid Central order worth?", centralOrders, rates), 105.5);
+});

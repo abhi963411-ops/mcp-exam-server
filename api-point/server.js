@@ -132,7 +132,7 @@ function isCountQuestion(question) {
 function amountMetric(question) {
   const normalized = normalizeText(question);
   if (/\b(refund|refunded|refunds|returned)\b/.test(normalized)) return "refund";
-  if (/\b(revenue|sales|spent|spend|turnover|value|amount|money|worth)\b/.test(normalized)) return "revenue";
+  if (/\b(revenue|sales|spent|spend|turnover|value|amount|money|worth|usd|dollars?|eur|euros?|inr|rupees?)\b/.test(normalized)) return "revenue";
   return null;
 }
 
@@ -172,7 +172,13 @@ function answerQuestion(question, orders, rates) {
   const rankedOrderCount = !metricName &&
     /\b(top|highest|largest|most|best|least|lowest|smallest)\b/i.test(question) &&
     /\borders?\b/i.test(question);
-  const metric = isUnitCount ? "units" : (count || rankedOrderCount ? "orders" : metricName || "revenue");
+  const metric = isUnitCount
+    ? "units"
+    : metricName === "revenue"
+      ? "revenue"
+      : count || rankedOrderCount
+        ? "orders"
+        : metricName || "revenue";
   const rows = metric === "refund"
     ? filtered.filter((order) => order.status === "refunded")
     : metric === "revenue"
